@@ -62,4 +62,4 @@ asm:
 
 run:
 	make iso
-	qemu-system-i386 -m 128M -s -device pvpanic -enable-kvm -serial stdio -d cpu_reset -cdrom ./tesseract.iso
+	qemu-system-i386 -m 128M -enable-kvm -serial stdio -cdrom ./tesseract.iso

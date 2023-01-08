@@ -5,7 +5,8 @@
 #include <arch/i386/gdt.hpp>
 #include <common/common.hpp>
 #include <drivers/video/font.hpp>
-#include <tasking/tasking.hpp>
+#include <arch/i386/idt.hpp>
+#include <arch/i386/input.hpp>
 
 #define LOGO_HEIGHT 100
 #define LOGO_WIDTH 344
@@ -439,28 +440,42 @@ void image_task_entry() {
 
 extern "C" void _kstart(multiboot_info_t* mboot_info){
     mb_info = mboot_info;
-    memory::init();
+    
+    // print_red = 255;
+    // print_green = 255;
+    // print_blue = 255;
+    // framebuffer::clear_screen(0, 43, 54);
 
-    print_red = 255;
-    print_green = 255;
-    print_blue = 255;
-    framebuffer::clear_screen(0, 43, 54);
-
-    font::printk("Loading GDT...");
-    framebuffer::flush();
+    // font::printk("Loading GDT...");
+    // framebuffer::flush();
     gdt::init();
-    print_red = 133;
-    print_green = 153;
-    print_blue = 0;
-    font::printk(" OK");
-    framebuffer::flush();
+    memory::init();
+    // print_red = 133;
+    // print_green = 153;
+    // print_blue = 0;
+    // font::printk(" OK");
+    // framebuffer::flush();
+    // font::new_line();
 
-    task_t* image_task;
-    tasking::configure_task(image_task, false, 4096, image_task_entry);
-    tasking::add_task(image_task);
+    // print_red = 255;
+    // print_green = 255;
+    // print_blue = 255;
+
+    // font::printk("Loading IDT...");
+    // framebuffer::flush();
+    idt::init();
+    // print_red = 133;
+    // print_green = 153;
+    // print_blue = 0;
+    // font::printk(" OK");
+    // framebuffer::flush();
+
+    // task_t* image_task;
+    // tasking::configure_task(image_task, false, 4096, image_task_entry);
+    // tasking::add_task(image_task);
 
     while(1) {
-        tasking::execute_task(image_task);
+        // tasking::execute_task(image_task);
     }
 }
 
