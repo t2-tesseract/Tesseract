@@ -60,6 +60,9 @@ asm:
 	nasm kernel/src/arch/i386/interrupts.asm -f elf32 -o interrupts.o
 	nasm kernel/src/arch/i386/idt.asm -f elf32 -o idt.o
 
+limine-build:
+	sh scripts/limine.sh
+
 run:
 	make iso
-	qemu-system-i386 -m 128M -enable-kvm -serial stdio -cdrom ./tesseract.iso
+	qemu-system-i386 -m 128M -serial stdio -cdrom ./tesseract.iso
